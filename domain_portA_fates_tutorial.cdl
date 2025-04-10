@@ -1,0 +1,59 @@
+netcdf c\:\\Users\\mu3575\\github\\FATES_docker\\fates-tutorial\\portA\\domain_portA_fates_tutorial {
+dimensions:
+	nj = 1 ;
+	ni = 1 ;
+	nv = 4 ;
+variables:
+	double xc(nj, ni) ;
+		xc:_FillValue = NaN ;
+		xc:long_name = "longitude of grid cell center" ;
+		xc:units = "degrees_east" ;
+		xc:bounds = "xv" ;
+	double yc(nj, ni) ;
+		yc:_FillValue = NaN ;
+		yc:long_name = "latitude of grid cell center" ;
+		yc:units = "degrees_north" ;
+		yc:bounds = "yv" ;
+		yc:filter1 = " set_fv_pole_yc ON, yc = -+90 at j=1,j=nj" ;
+	double xv(nj, ni, nv) ;
+		xv:_FillValue = NaN ;
+		xv:long_name = "longitude of grid cell verticies" ;
+		xv:coordinates = "yc xc" ;
+	double yv(nj, ni, nv) ;
+		yv:_FillValue = NaN ;
+		yv:long_name = "latitude of grid cell verticies" ;
+		yv:coordinates = "yc xc" ;
+	int mask(nj, ni) ;
+		mask:long_name = "domain mask" ;
+		mask:note = "unitless" ;
+		mask:comment = "0 value indicates cell is not active" ;
+		mask:coordinates = "xc yc" ;
+	double area(nj, ni) ;
+		area:_FillValue = NaN ;
+		area:long_name = "area of grid cell in radians squared" ;
+		area:units = "radian2" ;
+		area:coordinates = "xc yc" ;
+	double frac(nj, ni) ;
+		frac:_FillValue = NaN ;
+		frac:long_name = "fraction of grid cell that is active" ;
+		frac:note = "unitless" ;
+		frac:filter1 = "error if frac> 1.0+eps or frac < 0.0-eps; eps = 0.1000000E-11" ;
+		frac:filter2 = "limit frac to [fminval,fmaxval]; fminval= 0.1000000E-02 fmaxval=  1.000000" ;
+		frac:coordinates = "xc yc" ;
+
+// global attributes:
+		:title = "CCSM domain data:" ;
+		:Conventions = "CF-1.0" ;
+		:source_code = "SVN $Id: gen_domain.F90 6671 2007-09-28 21:56:26Z kauff $" ;
+		:SVN_url = " $URL: https://svn-ccsm-models.cgd.ucar.edu/tools/mapping/gen_domain/trunk/gen_domain.F90 $" ;
+		:history = "created by kauff, 2009-02-06 12:19:29" ;
+		:source = "/fis/cgd/cseg/csm/mapping/makemaps/fv1.9x2.5_gx1v6_090206/map_gx1v6_to_fv1.9x2.5_aave_da_090206.nc" ;
+		:map_domain_a = "gx1v6, Present DP x1" ;
+		:map_domain_b = "1.9x2.5 CAM finite volume grid" ;
+		:map_grid_file_ocn = "/fis/cgd/cseg/csm/mapping/grids/gx1v6_090205.nc" ;
+		:map_grid_file_atm = "/fis/cgd/cseg/csm/mapping/grids/fv1.9x2.5_060511.nc" ;
+		:output_file1 = "domain.ocn.gx1v6.090206.nc" ;
+		:output_file2 = "domain.lnd.fv1.9x2.5_gx1v6.090206.nc" ;
+		:user_comment = "Standard CCSM3.1/4.0 domain specification file with fv pole fix" ;
+data:
+}

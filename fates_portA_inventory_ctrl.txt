@@ -1,0 +1,8 @@
+TYPE LATITUDE LONGITUDE PSS_PATH CSS_PATH
+1 27.47368421 262.5 /inventorydata/portA/portA_2024.pss /inventorydata/portA/portA_2024.css
+
+
+
+
+
+
