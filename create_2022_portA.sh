@@ -8,11 +8,12 @@
 # USER SETTINGS
 # USER MAY ALSO WANT TO ADJUST XML CHANGES, AND NAMELIST ARGUMENTS
 # =====================================================================================
-export user=mulatowski
+export user=mbarak
 export TAG='Test1_portA'                               # User defined tag to differentiate runs
 export COMPSET=IELMFATES                                  # Compset (probably ICLM45ED or ICLM50ED)
 export MAC=lonestar6                                        # Name your machine
-export COMPILER=gnu                                       # Name your compiler
+export COMPILER=gnu    
+export SITE_NAME=portA                                                 # Name your compiler
 export FUNDING=t24_forecast
 export FATES_PARAM=fates_compass_params.nc                             # Name of FATES parameter file in S_CA_FATES/params/
 export SITE_BASE_DIR=/scratch/08386/mbarak/trial/FatesTutorial_Mar2021/TestCloneSpace/Fates_porta_data # Where is the site folder located? (SITE_NAME)
@@ -145,7 +146,7 @@ EOF
 
 # HERE WE NEED TO MODIFY THE STREAM FILE (DANGER ZONE - USERS BEWARE CHANGING)
 ./preview_namelists
-cp /lustre/scratch5/.mdt0/${user}/E3SM_run/scratch/${CASE_NAME}/run/datm.streams.txt.CLM1PT.ELM_USRDAT user_datm.streams.txt.CLM1PT.ELM_USRDAT
+cp ${CASEROOT}/${CASE_NAME}/run/datm.streams.txt.CLM1PT.ELM_USRDAT user_datm.streams.txt.CLM1PT.ELM_USRDAT
 `sed -i '/FLDS/d' user_datm.streams.txt.CLM1PT.ELM_USRDAT`
 `sed -i 's/CLM1PT_data/bci_0.1x0.1_met.v4_pio2/' user_datm.streams.txt.CLM1PT.ELM_USRDAT`
 
